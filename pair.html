@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DEV MAX MD SESSIONS</title>
+  <title>Starcore pairing site Dashboard</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
     :root {
@@ -284,40 +284,6 @@
       color: var(--muted);
     }
 
-    /* Loading spinner */
-    .spinner {
-      width: 40px;
-      height: 40px;
-      border: 4px solid rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      border-top-color: var(--highlight);
-      animation: spin 1s ease-in-out infinite;
-      margin: 0 auto;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* Progress bar */
-    .progress-container {
-      width: 100%;
-      height: 6px;
-      background: rgba(0, 0, 0, 0.2);
-      border-radius: 3px;
-      margin-top: 1rem;
-      overflow: hidden;
-      display: none;
-    }
-
-    .progress-bar {
-      height: 100%;
-      width: 0;
-      background: var(--primary);
-      border-radius: 3px;
-      transition: width 0.3s ease;
-    }
-
     /* Responsive design */
     @media (max-width: 768px) {
       .header {
@@ -353,8 +319,8 @@
   <!-- Header with Logo -->
   <header class="header">
     <div class="logo-container">
-      <img src="https://i.ibb.co/n8jhgqwz/devmax.png" alt="Starcore bot Logo" class="logo-img">
-      <div class="logo-text">DEV-SPACE</div>
+      <img src="https://i.ibb.co/FLDpmJqt/malvin-xd.jpg" alt="Starcore bot Logo" class="logo-img">
+      <div class="logo-text">Since-𝟐𝟎24</div>
     </div>
     
     <!-- Battery Indicator -->
@@ -369,8 +335,8 @@
     <!-- Pairing Box -->
     <div class="box">
       <h2>PAIRING CODE</h2>
-      <h5>DEV_MAX-MD </h5>
-      <p>Please enter your number with country code e.g 256xxxxxxxx</p>
+      <h5>STAR XD </h5>
+      <p>Please enter your number with country code e.g 263xxxxxxxx</p>
       
       <div class="input-container">
         <input type="number" id="number" placeholder="put you number" required>
@@ -378,14 +344,7 @@
       </div>
       
       <div id="pair-result">
-        <div id="loading-indicator" style="display: none;">
-          <div class="spinner"></div>
-          <p style="margin-top: 10px;">Processing your request...</p>
-        </div>
-      </div>
-      
-      <div class="progress-container" id="progress-container">
-        <div class="progress-bar" id="progress-bar"></div>
+        <p id="waiting-message" style="display: none;">Please wait...</p>
       </div>
       
       <button id="copy-code" onclick="copyCode()">COPY YOUR CODE</button>
@@ -395,13 +354,13 @@
     <div class="music-player">
       <h3>PLAY NOW</h3>
       <div class="music-title">PLAY SONG</div>
-      <div class="music-subtitle">by Dev Space</div>
+      <div class="music-subtitle">by XD devs</div>
       <button class="play-btn" onclick="togglePlay()">
         <i class="fas fa-pause" id="play-icon"></i>
       </button>
       <div class="time-display" id="time1">0:00</div>
-      <div class="music-subtitle">Jelio Starr Dev</div>
-      <audio id="audio1" src="https://files.catbox.moe/ehbao9.m4a" loop></audio>
+      <div class="music-subtitle">Dev Malvin</div>
+      <audio id="audio1" src="https://files.catbox.moe/pjlpd7.mp3" loop></audio>
     </div>
   </div>
 
@@ -412,9 +371,7 @@
     const submitBtn = document.getElementById("submit");
     const numberInput = document.getElementById("number");
     const copyCodeBtn = document.getElementById("copy-code");
-    const loadingIndicator = document.getElementById("loading-indicator");
-    const progressContainer = document.getElementById("progress-container");
-    const progressBar = document.getElementById("progress-bar");
+    const waitingMessage = document.getElementById("waiting-message");
     const batteryLevel = document.getElementById("battery-level");
     const batteryIcon = document.getElementById("battery-icon");
 
@@ -434,19 +391,6 @@
       } catch (err) {
         console.error('Failed to copy: ', err);
       }
-    }
-
-    // Simulate progress (for demo purposes)
-    function simulateProgress() {
-      let progress = 0;
-      const interval = setInterval(() => {
-        progress += Math.random() * 10;
-        if (progress >= 100) {
-          progress = 100;
-          clearInterval(interval);
-        }
-        progressBar.style.width = `${progress}%`;
-      }, 300);
     }
 
     // Submit handler
@@ -479,24 +423,13 @@
       numberInput.value = "+" + formattedNumber;
       numberInput.style.color = "var(--highlight)";
       
-      // Show loading state
-      loadingIndicator.style.display = "block";
-      progressContainer.style.display = "block";
+      waitingMessage.style.display = "block";
       pairResult.innerHTML = "";
-      pairResult.appendChild(loadingIndicator);
       copyCodeBtn.style.display = "none";
-      submitBtn.disabled = true;
-      
-      // Simulate progress (in a real app, you would update this based on actual progress)
-      simulateProgress();
       
       try {
         const { data } = await axios(`/code?number=${cleanNumber}`);
         const code = data.code || "Service Unavailable";
-        
-        // Hide loading and show result
-        loadingIndicator.style.display = "none";
-        progressContainer.style.display = "none";
         
         pairResult.innerHTML = `
           <p style="color:var(--highlight); font-weight:bold; font-size:1.2rem;">
@@ -504,13 +437,10 @@
           </p>
         `;
         copyCodeBtn.style.display = "inline-block";
+        waitingMessage.style.display = "none";
       } catch (error) {
-        // Hide loading and show error
-        loadingIndicator.style.display = "none";
-        progressContainer.style.display = "none";
         pairResult.innerHTML = '<p style="color:#ff5555">Error getting pairing code</p>';
-      } finally {
-        submitBtn.disabled = false;
+        waitingMessage.style.display = "none";
       }
     });
 
@@ -605,4 +535,4 @@
     });
   </script>
 </body>
-</html>
+  </html>
