@@ -56,34 +56,29 @@ router.get('/', async (req, res) => {
 					let data = fs.readFileSync(__dirname + `/temp/${id}/creds.json`);
 					await delay(800);
 				   let b64data = Buffer.from(data).toString('base64');
-				   let session = await Qr_Code_By_Malvin_Tech.sendMessage(Qr_Code_By_Malvin_Tech.user.id, { text: 'starcore~' + b64data });
+				   let session = await Qr_Code_By_Malvin_Tech.sendMessage(Qr_Code_By_Malvin_Tech.user.id, { text: 'DEVSPACE~' + b64data });
 	
-				   let STAR_MD_TEXT = `
-╭─═━⌬━═─⊹⊱✦⊰⊹─═━⌬━═─ 
-╎   『 𝐒𝐄𝐒𝐒𝐈𝐎𝐍 𝐂𝐎𝐍𝐍𝐄𝐂𝐓𝐄𝐃 』   
-╎  ✦ sᴛᴀʀᴄᴏʀᴇ sᴇssɪᴏɴ
-╎  ✦  ʙʏ ᴅᴇᴠ ᴍᴀʟᴠɪɴ
-╰╴╴╴╴
+				   let Star_MD_TEXT = `
+╭───────────────────╮
+│🚀 SESSION CONNECTED  
+│                               
+│ ⭐ DEV_MAX-MD SESSION     
+│ ⚡ Powered by Dev Space  
+╰───────────────────╯
+╭───────────────────╮
+│    📞 CONTACT & SUPPORT    
+│                             
+│🎬 YouTube: youtube.com/@dev-hosting 
+│👑 Owner: DEV SPACE 
+│💾 Repo: github.com/Jeliostarr/DEV_MAX-MD
+│📢 Updates: https://whatsapp.com/channel/0029VbAzvMIHVvTioxfF192d
+╰───────────────────╯
 
-▌   『 🔐 𝐒𝐄𝐋𝐄𝐂𝐓𝐄𝐃 𝐒𝐄𝐒𝐒𝐈𝐎𝐍 』   
-▌  • Session ID:  
-▌  ⛔ [ Please set your SESSION_ID ] 
-
-╔═
-╟   『 𝐂𝐎𝐍𝐓𝐀𝐂𝐓 & 𝐒𝐔𝐏𝐏𝐎𝐑𝐓 』  
-╟  🎥 𝐘𝐨𝐮𝐓𝐮𝐛𝐞: youtube.com/@malvintech2  
-╟  👑 𝐎𝐰𝐧𝐞𝐫: 263714757857  
-╟  💻 𝐑𝐞𝐩𝐨: github.com/XdKing2/Star-xd  
-╟  💻 𝐑𝐞𝐩𝐨: github.com/XdKing2/MALVIN-XD 
-╟  👥 𝐖𝐚𝐆𝐫𝐨𝐮𝐩: https://chat.whatsapp.com/Dx7HbtW7Cf12iCVjJBpD0x?mode=ac_t 
-╟  📢 𝐖𝐚𝐂𝐡𝐚𝐧𝐧𝐞𝐥: https://whatsapp.com/channel/0029VbB3YxTDJ6H15SKoBv3S 
-╟  📸 𝐈𝐧𝐬𝐭𝐚: instagram.com/techlord01  
-╰  
-✦⋅⋆⋅⋆⋅⋆⋅⋆⋅⋆⋅⋆⋅⋆⋅⋆⋅⋆⋅⋆⋅✦  
-   𝐄𝐍𝐉𝐎𝐘 𝐒𝐓𝐀𝐑-𝐗𝐃!  
-✦⋅⋆⋅⋆⋅⋆⋅⋆⋅⋆⋅⋆⋅⋆⋅⋆⋅⋆⋅⋆⋅✦  
+   ENJOY DEV MAX MD BOT
 ______________________________
-★彡[ᴅᴏɴ'ᴛ ғᴏʀɢᴇᴛ ᴛᴏ sᴛᴀʀ ᴛʜᴇ ʀᴇᴘᴏ!]彡★`;
+⭐ Don't forget to star the repo! ⭐
+______________________________
+`;
 	 await Qr_Code_By_Malvin_Tech.sendMessage(Qr_Code_By_Malvin_Tech.user.id,{text:STAR_MD_TEXT},{quoted:session})
 
 
